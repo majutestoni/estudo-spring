@@ -31,6 +31,10 @@ public class CarroService {
 				delete(scan);
 				
 				break;
+			case 4:
+				update(scan);
+				
+				break;
 			default:
 				aa = false;
 				break;
@@ -60,9 +64,19 @@ public class CarroService {
 	private void delete(Scanner scan) {
 		System.out.println("informe o id");
 		int a = scan.nextInt();
-		Carro b = new Carro();
-		b.setCd_carro(a);
-		carroRepository.delete(b);
+		carroRepository.deleteById(a);
 	}
-
+	
+	private void update(Scanner scan) {
+		System.out.println("Digite o nome");
+		String nome = scan.next();
+		System.out.println("Digite o id");
+		Integer id = scan.nextInt();
+		
+		Carro a = new Carro();
+		a.setCd_carro(id);
+		a.setNm_carro(nome);
+		
+		carroRepository.save(a);
+	}
 }
