@@ -7,12 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CarroApplication implements CommandLineRunner{
+public class CarroApplication implements CommandLineRunner {
 	private final CarroService carroService;
+	private final InventarioService inventarioService;
 	private boolean aa = true;
 
-	public CarroApplication(CarroService c) {
+	public CarroApplication(CarroService c, InventarioService s) {
 		carroService = c;
+		inventarioService = s;
 	}
 
 	public static void main(String[] args) {
@@ -28,6 +30,9 @@ public class CarroApplication implements CommandLineRunner{
 			switch (escolha) {
 			case 1:
 				carroService.inicializar(scan);
+				break;
+			case 2:
+				inventarioService.inicializar(scan);;
 				break;
 
 			default:

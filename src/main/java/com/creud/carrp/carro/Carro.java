@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Carro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cd_carro;
+	private Integer cd_tipo;
 	private String nm_carro;
 
 	public Carro() {
@@ -21,11 +21,11 @@ public class Carro {
 	}
 
 	public Integer getCd_carro() {
-		return cd_carro;
+		return cd_tipo;
 	}
 
 	public void setCd_carro(Integer cd_carro) {
-		this.cd_carro = cd_carro;
+		this.cd_tipo = cd_carro;
 	}
 
 	public String getNm_carro() {
