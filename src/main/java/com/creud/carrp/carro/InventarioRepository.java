@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InventarioRepository extends CrudRepository<Inventario, Integer> {
 
-	@Query(value = "SELECT i.qt_carros, i.vl_valor, t.cd_tipo FROM inventario i JOIN tipo t ON t.cd_tipo = i.cd_tipo", nativeQuery = true)
+	@Query(value = "SELECT SUM(i.qt_carros), i.vl_valor, i.cd_inventario, i.cd_tipo FROM inventario i GROUP BY cd_tipo", nativeQuery = true)
 	List<Inventario> findAllResume();
+
+	
+	@Query(value = "SELECT SUM(i.qt_carros) FROM inventario i", nativeQuery = true)
+	float totalCarros();
 }

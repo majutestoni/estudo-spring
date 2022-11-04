@@ -25,6 +25,9 @@ public class InventarioService {
 			case 2:
 				relatorio();
 				break;
+			case 3:
+				quantidade();
+				break;
 
 			default:
 				bb = false;
@@ -47,9 +50,14 @@ public class InventarioService {
 
 	}
 	
-	private void relatorio() {
+	private void relatorio() { 
 		List<Inventario> a = inventarioRepository.findAllResume();
 		a.forEach(b -> System.out.println(b.toString()));
+	}
+	
+	private float quantidade() {
+		System.out.println(inventarioRepository.totalCarros());
+		return inventarioRepository.totalCarros();
 	}
 
 }
