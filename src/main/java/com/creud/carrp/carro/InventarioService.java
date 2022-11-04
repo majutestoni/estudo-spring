@@ -66,6 +66,17 @@ public class InventarioService {
 		System.out.println(inventarioRepository.totalCarros());
 		return inventarioRepository.totalCarros();
 	}
+	
+	private void consultar() {
+		int page = 0;
+		int size = 3;
+		Pageable pageable = PageRequest.of(page, size, Sort.unsorted());
+		Page<Inventario> a = inventarioRepository.findAll(pageable);
+		
+		System.out.println(a);// número de paginas
+		System.out.println(a.getNumber());// número de paginas
+		System.out.println(a.getTotalElements());// número de paginas
+	}
 
 	private void consultaPorTipo(Scanner scan) {
 		System.out.println("Digite o tipo");
@@ -73,11 +84,9 @@ public class InventarioService {
 		int page = 0;
 		int size = 3;
 		Pageable pageable = PageRequest.of(page, size, Sort.unsorted());
-		Page<Inventario> a = inventarioRepository.findAll(pageable);
+		List<Inventario> a = inventarioRepository.findByCdTipo(ab, pageable);
 
-		System.out.println(a);// número de paginas
-		System.out.println("qual a pagina atual " + a.getNumber());
-		System.out.println("Total de elementos " + a.getTotalElements());
+		System.out.println(a.toString());
 		a.forEach(b -> System.out.println(b));
 	}
 
