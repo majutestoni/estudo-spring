@@ -3,6 +3,10 @@ package com.creud.carrp.carro;
 import java.util.List;
 import java.util.Scanner;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +32,9 @@ public class InventarioService {
 			case 3:
 				quantidade();
 				break;
+			case 4:
+				consultaPorTipo(scan);
+				break;
 
 			default:
 				bb = false;
@@ -49,15 +56,29 @@ public class InventarioService {
 		System.out.println("salvo");
 
 	}
-	
-	private void relatorio() { 
+
+	private void relatorio() {
 		List<Inventario> a = inventarioRepository.findAllResume();
 		a.forEach(b -> System.out.println(b.toString()));
 	}
-	
+
 	private float quantidade() {
 		System.out.println(inventarioRepository.totalCarros());
 		return inventarioRepository.totalCarros();
+	}
+
+	private void consultaPorTipo(Scanner scan) {
+		System.out.println("Digite o tipo");
+		Integer ab = scan.nextInt();
+		int page = 0;
+		int size = 3;
+		Pageable pageable = PageRequest.of(page, size, Sort.unsorted());
+		Page<Inventario> a = inventarioRepository.findAll(pageable);
+
+		System.out.println(a);// número de paginas
+		System.out.println("qual a pagina atual " + a.getNumber());
+		System.out.println("Total de elementos " + a.getTotalElements());
+		a.forEach(b -> System.out.println(b));
 	}
 
 }
